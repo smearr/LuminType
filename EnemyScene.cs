@@ -40,6 +40,7 @@ public class EnemyScene : KinematicBody2D
 	
 	}
 	
+	// To calculate wpm, words typed divided by time passed in minutes.
 	public void Enemy_Kill()
 	{
 		Typer.Text = "";
