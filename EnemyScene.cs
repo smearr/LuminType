@@ -52,11 +52,4 @@ public class EnemyScene : KinematicBody2D
 		QueueFree();
 	}
 	
-	public void return_position()
-	{
-		if (Player.Position.x != 673)
-		{
-
-		}
-	}
 }
