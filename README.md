@@ -8,9 +8,10 @@ I wanted to create a similar game for my portfolio, with my own logic, graphics,
 
 # Development Log
 
-- create teleport effect
 - main menu 
 - create different difficulties
-- create monster sprites
 - different modes
 - larger word dictionary
+- Optimize enemy spawns
+- Score system
+- Make a game over screen
