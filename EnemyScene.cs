@@ -70,15 +70,14 @@ public class EnemyScene : KinematicBody2D
 		
 		if (Typer.Text == Text.Text)
 		{
-			Global.pos = Position;
 			Enemy_Kill();
 		}
-		
 	}
 	
 	public void Enemy_Kill()
 	{
 		Typer.Text = "";
+		Global.pos = Position;
 		Global.is_dead = true;
 		Global.WordsTyped += 1;
 		QueueFree();
