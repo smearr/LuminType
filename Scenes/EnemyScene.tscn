@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/EnemyScene.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Pokemon Classic.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=7]
+size = 14
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[node name="Enemy" type="KinematicBody2D" groups=["Enemy"]]
+position = Vector2( 167, 97 )
+script = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 18.7, 5.7 )
+polygon = PoolVector2Array( -25, -6, 24, 21, 24, -38 )
+
+[node name="Text" type="Label" parent="."]
+margin_left = -26.0
+margin_top = -53.0
+margin_right = 32.0
+margin_bottom = -29.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "Poop"
+align = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+modulate = Color( 1.5, 1.5, 1.5, 1 )
+position = Vector2( 18.7, 5.7 )
+rotation = -1.5708
+scale = Vector2( 1.20833, 1.04545 )
+color = Color( 1.5, 0, 0, 1 )
+polygon = PoolVector2Array( -17, 23, 31, 23, 5.34483, -23.913 )
