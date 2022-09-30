@@ -18,8 +18,8 @@ public class EnemyScene : KinematicBody2D
 	public KinematicBody2D Enemy;
 	
 	public Polygon2D EnemySprite;
-	
-	
+	public CollisionPolygon2D EnemyCollider;
+	public Timer timer;
 		
 	Random word_from_list = new Random();
 
@@ -33,8 +33,8 @@ public class EnemyScene : KinematicBody2D
 		PlayerSprite = GetNode<Polygon2D>("/root/Node2D/Player/Polygon2D");
 		crystal = GetNode<Area2D>("/root/Node2D/crystal");
 		Enemy = GetNode<KinematicBody2D>(".");
-
-		
+		EnemyCollider = GetNode<CollisionPolygon2D>("CollisionPolygon2D");
+		timer = GetNode<Timer>("/root/Node2D/BulletTimer");
 		
 		Text.Text = Global.easy_words[word_from_list.Next(0, Global.easy_words.Length)];
 		
@@ -44,17 +44,10 @@ public class EnemyScene : KinematicBody2D
 
 	public override void _Process(float delta)
 	{	
-		if (Global.is_dead == false)
-		{
-			velocity = (crystal.Position - Position).Normalized() * runSpeed;
-			velocity = MoveAndSlide(velocity);
 
-		}
-		
-		else if (Global.is_dead == true)
-		{
-			velocity = MoveAndSlide(new Vector2(0,0));
-		}
+		velocity = (crystal.Position - Position).Normalized() * runSpeed;
+		velocity = MoveAndSlide(velocity);
+
 		
 		LookAt(crystal.Position);
 		if (Position.x > 635)
@@ -65,11 +58,15 @@ public class EnemyScene : KinematicBody2D
 		else if (Position.x < 635)
 		{
 			EnemySprite.RotationDegrees = 90;
+			EnemyCollider.Scale = new Vector2(-1, 1);
 			
 		}
 		
 		if (Typer.Text == Text.Text)
 		{
+			Global.pos = Position;
+			Global.isShooting = true;
+			timer.Start();
 			Enemy_Kill();
 		}
 	}
@@ -77,14 +74,18 @@ public class EnemyScene : KinematicBody2D
 	public void Enemy_Kill()
 	{
 		Typer.Text = "";
-		Global.pos = Position;
 		Global.is_dead = true;
 		Global.WordsTyped += 1;
 		QueueFree();
 
 	}
-	
 }
+
+
+
+
+
+
 
 
 

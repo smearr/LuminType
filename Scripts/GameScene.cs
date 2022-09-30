@@ -23,6 +23,7 @@ public class GameScene : Node2D
 	public PackedScene Enemy1 = ResourceLoader.Load("res://Scenes/EnemyScene.tscn") as PackedScene;
 	public PackedScene DeathEffect = ResourceLoader.Load("res://Scenes/ParticleScene.tscn") as PackedScene;
 	public PackedScene GameOverEffect = ResourceLoader.Load("res://Scenes/GameOverParticle.tscn") as PackedScene;
+	public PackedScene Bullet = ResourceLoader.Load("res://Scenes/BulletScene.tscn") as PackedScene;
 	
 	public float elapsed_time = 0;
 
@@ -49,11 +50,23 @@ public class GameScene : Node2D
 		if(Global.is_dead == true)
 		{	
 			CPUParticles2D Particle1 = (CPUParticles2D)DeathEffect.Instance();
+			KinematicBody2D bullet = (KinematicBody2D)Bullet.Instance();
 			AddChild(Particle1);
 			Particle1.Position = Global.pos;
 			Particle1.Emitting = true;
 			Global.is_dead = false;
+			
 		}
+		
+		if(Global.isShooting == true)
+		{
+			KinematicBody2D bullet = (KinematicBody2D)Bullet.Instance();
+
+			AddChild(bullet);
+			bullet.Position = Player.Position;
+			Global.isShooting = false;
+		}
+
 	}
 	
 	private void _on_SpawnTimer_timeout()
@@ -93,7 +106,15 @@ public class GameScene : Node2D
 	{
 		gameoverUI.Visible = true;
 	}
+	
+	private void _on_BulletTimer_timeout()
+	{
+		Global.KillConfirm = true;
+	}
 }
+
+
+
 
 
 
