@@ -6,12 +6,14 @@ public class Player : KinematicBody2D
 {
 	public Vector2 velocity = new Vector2();
 	public Area2D crystal;
+	public Sprite crosshair;
 	
 	
 	
 	public override void _Ready()
 	{
 		crystal = GetNode<Area2D>("/root/Node2D/crystal");
+		crosshair = GetNode<Sprite>("Crosshair");
 	}
 	
 	public override void _Process(float delta)
@@ -29,12 +31,17 @@ public class Player : KinematicBody2D
 			{
 				min_distance = distance;
 				min_enemy = enemy;
+				enemy.GetNode<Label>("Text").Modulate = new Color("00d5ff");
 				
 
 			}
 		}
 
-		if(min_enemy != null) LookAt(min_enemy.Position);
+		if(min_enemy != null)
+		{
+			LookAt(min_enemy.Position);
+			crosshair.GlobalPosition = min_enemy.Position;
+		} 
 		
 	}
 }

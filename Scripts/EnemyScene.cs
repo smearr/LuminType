@@ -62,7 +62,7 @@ public class EnemyScene : KinematicBody2D
 			
 		}
 		
-		if (Typer.Text == Text.Text)
+		if (Typer.Text == Text.Text  && Text.Modulate == new Color("00d5ff"))
 		{
 			Global.pos = Position;
 			Global.isShooting = true;
