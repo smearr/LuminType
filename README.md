@@ -10,4 +10,5 @@ I wanted to create a similar game for my portfolio, with my own logic, graphics,
 
 - create different difficulties, requires balanced spawn rates for enemies so user is not overwhelmed
 - different modes, endless, practice, etc.
+- add sound effects
 
