@@ -2,9 +2,10 @@
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/GameScene.cs" type="Script" id=2]
-[ext_resource path="res://Scripts/Trail.cs" type="Script" id=3]
+[ext_resource path="res://Assets/858431-small-removebg-preview.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Pokemon Classic.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scripts/Menu.cs" type="Script" id=5]
+[ext_resource path="res://Assets/270327__littlerobotsoundfactory__hit-00.wav" type="AudioStream" id=6]
 
 [sub_resource type="Environment" id=26]
 background_mode = 4
@@ -40,9 +41,6 @@ corner_radius_bottom_left = 5
 [sub_resource type="DynamicFont" id=22]
 size = 29
 font_data = ExtResource( 4 )
-
-[sub_resource type="Curve" id=25]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Shader" id=27]
 code = "shader_type canvas_item;
@@ -150,12 +148,10 @@ offset = Vector2( 215, 120 )
 texture_offset = Vector2( 2, 0 )
 polygon = PoolVector2Array( -250, -120, -215, -276, -180, -120, -213, -34 )
 
-[node name="Line2D" type="Line2D" parent="Player"]
-show_behind_parent = true
-rotation = 1.90102
-width_curve = SubResource( 25 )
-default_color = Color( 0.956863, 0.827451, 0.678431, 1 )
-script = ExtResource( 3 )
+[node name="Crosshair" type="Sprite" parent="Player"]
+position = Vector2( 226, 7.00024 )
+scale = Vector2( 0.18567, 0.18567 )
+texture = ExtResource( 3 )
 
 [node name="crystal" type="Area2D" parent="."]
 position = Vector2( 633.82, 394 )
@@ -224,6 +220,9 @@ custom_styles/normal = SubResource( 35 )
 text = "Exit"
 flat = true
 align = 0
+
+[node name="soundfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
 [connection signal="timeout" from="GameOverPopupTimer" to="." method="_on_GameOverPopupTimer_timeout"]
