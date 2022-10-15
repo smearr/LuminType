@@ -38,30 +38,43 @@ public class EnemyScene : KinematicBody2D
 		
 		Text.Text = Global.easy_words[word_from_list.Next(0, Global.easy_words.Length)];
 		
+		if (Global.gameMode == "endless")
+		{
+			Scale = new Vector2(1.5f, 1.5f);
+		}
+		
 
 	}
 
 
 	public override void _Process(float delta)
 	{	
-
-		velocity = (crystal.Position - Position).Normalized() * runSpeed;
-		velocity = MoveAndSlide(velocity);
-
 		
-		LookAt(crystal.Position);
-		if (Position.x > 635)
+		if (Global.gameMode == "towerdefense")
 		{
-			Enemy.Scale = new Vector2(-1, 1);
-			Text.RectScale = new Vector2(1, -1);
+			velocity = (crystal.Position - Position).Normalized() * runSpeed;
+			velocity = MoveAndSlide(velocity);
+			LookAt(crystal.Position);
+			
+			if (Position.x > 635)
+			{
+				Enemy.Scale = new Vector2(-1, 1);
+				Text.RectScale = new Vector2(1, -1);
+			}
+			else if (Position.x < 635)
+			{
+				EnemySprite.RotationDegrees = 90;
+				EnemyCollider.Scale = new Vector2(-1, 1);
+			}
 		}
-		else if (Position.x < 635)
+		
+		else if (Global.gameMode == "endless")
 		{
+			velocity = (Position);
 			EnemySprite.RotationDegrees = 90;
 			EnemyCollider.Scale = new Vector2(-1, 1);
-			
 		}
-		
+
 		if (Typer.Text == Text.Text  && Text.Modulate == new Color("00d5ff"))
 		{
 			Global.pos = Position;

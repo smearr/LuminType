@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Linq;
+using System.Collections.Generic;
+
 
 public class GameScene : Node2D
 {
@@ -15,6 +17,8 @@ public class GameScene : Node2D
 	public Area2D crystal;
 	public CanvasLayer gameoverUI;
 	public Label GameOverWPM;
+	public AudioStreamPlayer2D soundfx;
+	public CollisionShape2D crystalcollider;
 	
 	public Label Text;
 	public Label WPM;
@@ -38,6 +42,18 @@ public class GameScene : Node2D
 		gameoverUI = GetNode<CanvasLayer>("CanvasLayer");
 		GameOverWPM = GetNode<Label>("CanvasLayer/Panel/GameOverWPM");
 		GameOverTimer = GetNode<Timer>("GameOverPopupTimer");
+		soundfx = GetNode<AudioStreamPlayer2D>("soundfx");
+		crystalcollider = GetNode<CollisionShape2D>("crystal/CollisionShape2D");
+		crystal = GetNode<Area2D>("crystal");
+		
+		if (Global.gameMode == "endless")
+		{
+			KinematicBody2D Enemies1 = (KinematicBody2D)Enemy1.Instance();
+			KinematicBody2D Enemies2 = (KinematicBody2D)Enemy1.Instance();
+			
+			crystal.Position = new Vector2(10000,10000);
+		}
+		
 		
 	}
 	
@@ -46,6 +62,8 @@ public class GameScene : Node2D
 
 		elapsed_time += delta;
 		WPM.Text = ((Global.WordsTyped / (elapsed_time / 60)) + " WPM");
+		
+
 		
 		if(Global.is_dead == true)
 		{	
@@ -66,7 +84,43 @@ public class GameScene : Node2D
 			bullet.Position = Player.Position;
 			Global.isShooting = false;
 		}
-
+		
+		else if (Global.gameMode == "endless")
+		{
+			KinematicBody2D Enemies1 = (KinematicBody2D)Enemy1.Instance();
+			KinematicBody2D Enemies2 = (KinematicBody2D)Enemy1.Instance();
+			KinematicBody2D Enemies3 = (KinematicBody2D)Enemy1.Instance();
+			KinematicBody2D Enemies4 = (KinematicBody2D)Enemy1.Instance();
+			
+			
+			GD.Print(GetTree().GetNodesInGroup("Enemies").Count);
+			
+			if (GetTree().GetNodesInGroup("Enemies").Count <= 1)
+			{
+				Enemies2.AddToGroup("Enemies");
+				Enemies2.Position = new Vector2(400, 150);
+				AddChild(Enemies2);
+				
+				Enemies1.Position = new Vector2(100, 150);
+				AddChild(Enemies1);
+				Enemies1.AddToGroup("Enemies");
+				
+				Enemies3.AddToGroup("Enemies");
+				Enemies3.Position = new Vector2(700, 150);
+				AddChild(Enemies3);
+				
+				Enemies4.AddToGroup("Enemies");
+				Enemies4.Position = new Vector2(1000, 150);
+				AddChild(Enemies4);
+	
+				
+			}
+		}
+		
+		if (Input.IsActionPressed("ui_cancel"))
+		{
+			Game_Over();
+		}
 	}
 	
 	private void _on_SpawnTimer_timeout()
@@ -74,12 +128,14 @@ public class GameScene : Node2D
 		KinematicBody2D Enemies1 = (KinematicBody2D)Enemy1.Instance();
 		KinematicBody2D Enemies2 = (KinematicBody2D)Enemy1.Instance();
 		
-	
-		AddChild(Enemies1);
-		Enemies1.Position = new Vector2(0, pos.Next(0, 968));
-		
-		AddChild(Enemies2);
-		Enemies2.Position = new Vector2(1270, pos.Next(0, 968));
+		if (Global.gameMode == "towerdefense")
+		{
+			AddChild(Enemies1);
+			Enemies1.Position = new Vector2(0, pos.Next(0, 968));
+			
+			AddChild(Enemies2);
+			Enemies2.Position = new Vector2(1270, pos.Next(0, 968));
+		}
 	}
 	
 	private void _on_crystal_body_entered(KinematicBody2D body)
@@ -110,6 +166,7 @@ public class GameScene : Node2D
 	private void _on_BulletTimer_timeout()
 	{
 		Global.KillConfirm = true;
+		soundfx.Playing = true;
 	}
 }
 
