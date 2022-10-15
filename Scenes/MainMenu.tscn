@@ -15,6 +15,8 @@ glow_intensity = 0.04
 glow_blend_mode = 0
 glow_hdr_threshold = 1.5
 glow_hdr_luminance_cap = 0.5
+glow_bicubic_upscale = true
+glow_high_quality = true
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -66,6 +68,23 @@ custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 4 )
 text = "Play"
 
+[node name="Mode1Check" type="CheckButton" parent="."]
+margin_left = 11.0
+margin_top = 816.0
+margin_right = 226.0
+margin_bottom = 856.0
+pressed = true
+text = "Tower Defense Mode"
+
+[node name="Mode2Check" type="CheckButton" parent="."]
+margin_left = 58.0
+margin_top = 852.0
+margin_right = 227.0
+margin_bottom = 892.0
+text = "Endless Mode"
+
 [connection signal="mouse_entered" from="PlayBttn" to="." method="_on_PlayBttn_mouse_entered"]
 [connection signal="mouse_exited" from="PlayBttn" to="." method="_on_PlayBttn_mouse_exited"]
 [connection signal="pressed" from="PlayBttn" to="." method="_on_PlayBttn_pressed"]
+[connection signal="pressed" from="Mode1Check" to="." method="_on_Mode1Check_pressed"]
+[connection signal="pressed" from="Mode2Check" to="." method="_on_Mode2Check_pressed"]

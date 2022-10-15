@@ -5,7 +5,8 @@ offsets = PoolRealArray( 0, 0.00552486, 0.0110497, 0.0220994, 0.994475, 1 )
 colors = PoolColorArray( 0, 0, 0, 1, 0.988235, 0.454902, 0.454902, 1, 0.193604, 0.810715, 0.953125, 1, 0.988235, 0.454902, 0.454902, 1, 0.933702, 0.933702, 0.933702, 1, 1, 1, 1, 1 )
 
 [node name="deatheffect" type="CPUParticles2D"]
-z_index = -1
+show_behind_parent = true
+z_index = -5
 emitting = false
 amount = 75
 lifetime = 10.0
