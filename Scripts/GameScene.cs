@@ -52,6 +52,7 @@ public class GameScene : Node2D
 			KinematicBody2D Enemies2 = (KinematicBody2D)Enemy1.Instance();
 			
 			crystal.Position = new Vector2(10000,10000);
+			Typer.RectPosition = new Vector2(518, 702);
 		}
 		
 		
@@ -98,19 +99,19 @@ public class GameScene : Node2D
 			if (GetTree().GetNodesInGroup("Enemies").Count <= 1)
 			{
 				Enemies2.AddToGroup("Enemies");
-				Enemies2.Position = new Vector2(400, 150);
+				Enemies2.Position = new Vector2(400, 410);
 				AddChild(Enemies2);
 				
-				Enemies1.Position = new Vector2(100, 150);
+				Enemies1.Position = new Vector2(100, 410);
 				AddChild(Enemies1);
 				Enemies1.AddToGroup("Enemies");
 				
 				Enemies3.AddToGroup("Enemies");
-				Enemies3.Position = new Vector2(700, 150);
+				Enemies3.Position = new Vector2(700, 410);
 				AddChild(Enemies3);
 				
 				Enemies4.AddToGroup("Enemies");
-				Enemies4.Position = new Vector2(1000, 150);
+				Enemies4.Position = new Vector2(1000, 410);
 				AddChild(Enemies4);
 	
 				
