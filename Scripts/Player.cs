@@ -22,7 +22,7 @@ public class Player : KinematicBody2D
 		
 		else if (Global.gameMode == "endless")
 		{
-			Position = new Vector2(1156, 410);
+			Position = new Vector2(1156, 150);
 		}
 	}
 	
