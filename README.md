@@ -5,6 +5,8 @@ This project is inspired by the many hours I spent racing my friends on typing s
 
 I wanted to create a similar game for my portfolio, with my own logic, graphics, and features. 
 
+You can play the game at: https://sameerr.itch.io/lumintype 
+
 
 # Development Log
 
